@@ -1,0 +1,5 @@
+eyeD3==0.8.5
+jivago==0.0.4
+pathlib==1.0.1
+python-magic==0.4.15
+six==1.11.0
