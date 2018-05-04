@@ -1,0 +1,11 @@
+language: python
+python:
+- '3.6'
+install:
+- pip install -r requirements.txt
+script:
+- sh run_tests.sh
+branches:
+  only:
+  - master
+  - /^\d+\.\d+(\.\d+)?(-\S*)?$/
