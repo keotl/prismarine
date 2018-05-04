@@ -1,0 +1,2 @@
+class UnknownAudioFileFormatException(Exception):
+    pass

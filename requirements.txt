@@ -1,5 +1,7 @@
+coverage==4.5.1
 eyeD3==0.8.5
 jivago==0.0.4
+mutagen==1.40.0
 pathlib==1.0.1
 python-magic==0.4.15
 six==1.11.0

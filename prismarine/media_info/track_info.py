@@ -5,8 +5,10 @@ from prismarine.media_info.media_info import MediaInfo
 
 class TrackInfo(MediaInfo):
 
-    def __init__(self, id: str, title: str, artist: str, length: str, format: str, genre: str, number: int,
+    def __init__(self, id: str, title: str, artist: str, album: str, length: float, format: str, genre: str,
+                 number: int,
                  tracks_on_disc: Optional[int]):
+        self.album = album
         self.genre = genre
         self.number = number
         self.tracks_on_disc = tracks_on_disc
