@@ -25,7 +25,7 @@ class MediaIndexer(object):
         for file in files:
             try:
                 track_info = self.metadata_reader.read_metadata(file)
-                self.media_repository.save(track_info)
+                self.media_repository.save_track(track_info)
             except UnknownAudioFileFormatException:
                 continue
 
