@@ -40,3 +40,4 @@ class MetadataReadingStrategyTest(unittest.TestCase):
         self.assertEqual(TRACK_NUMBER, strategy.get_track_number(file), "track number")
         self.assertEqual(TOTAL_TRACKS, strategy.get_total_tracks(file), "total tracks")
         self.assertEqual(ALBUM, strategy.get_album(file), "album")
+        self.assertEqual(GENRE, strategy.get_genre(file), "genre")

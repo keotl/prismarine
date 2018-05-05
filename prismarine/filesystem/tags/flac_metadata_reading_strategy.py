@@ -15,11 +15,11 @@ class FlacMetadataReadingStrategy(MetadataReadingStrategy):
 
     @Override
     def get_artist(self, audio_file: FileType) -> str:
-        return audio_file['artist'][0]
+        return self.get_or_none(audio_file, 'artist')
 
     @Override
     def get_album(self, audio_file: FileType) -> str:
-        return audio_file['album'][0]
+        return self.get_or_none(audio_file, 'album')
 
     @Override
     def get_length(self, audio_file: FileType) -> float:
@@ -27,15 +27,15 @@ class FlacMetadataReadingStrategy(MetadataReadingStrategy):
 
     @Override
     def get_genre(self, audio_file: FileType) -> str:
-        return audio_file['genre'][0]
+        return self.get_or_none(audio_file, 'genre')
 
     @Override
     def get_track_number(self, audio_file: FileType) -> int:
-        return int(audio_file['tracknumber'][0])
+        return self.get_numeric_or_none(audio_file, 'tracknumber')
 
     @Override
     def get_total_tracks(self, audio_file: FileType) -> int:
-        return int(audio_file['totaltracks'][0])
+        return self.get_numeric_or_none(audio_file, 'totaltracks')
 
     @Override
     def get_format(self, audio_file: FileType) -> str:
@@ -43,4 +43,10 @@ class FlacMetadataReadingStrategy(MetadataReadingStrategy):
 
     @Override
     def get_title(self, audio_file: FileType) -> str:
-        return audio_file['title'][0]
+        return self.get_or_none(audio_file, 'title')
+
+    def get_or_none(self, audio_file: FileType, key: str) -> str:
+        return audio_file.get(key)[0] if audio_file.get(key) else None
+
+    def get_numeric_or_none(self, audio_file: FileType, key: str) -> int:
+        return int(audio_file.get(key)[0]) if audio_file.get(key) else None

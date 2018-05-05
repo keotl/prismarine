@@ -1,6 +1,7 @@
 import unittest
 from unittest import mock
 
+from prismarine.filesystem.tags.metadata_default_values import MetadataDefaultValues
 from prismarine.filesystem.tags.metadata_reader import MetadataReader
 from prismarine.filesystem.tags.metadata_reading_strategy import MetadataReadingStrategy
 from prismarine.filesystem.tags.unknown_audio_file_format_exception import UnknownAudioFileFormatException
@@ -21,7 +22,7 @@ class MetadataReaderTest(unittest.TestCase):
 
     def setUp(self):
         self.readerMock: MetadataReadingStrategy = mock.create_autospec(MetadataReadingStrategy)
-        self.metadataReader = MetadataReader([self.readerMock])
+        self.metadataReader = MetadataReader([self.readerMock], MetadataDefaultValues())
         self.readerMock.matches.return_value = True
         self.readerMock.get_artist.return_value = ARTIST
         self.readerMock.get_title.return_value = TITLE
@@ -37,7 +38,7 @@ class MetadataReaderTest(unittest.TestCase):
         self.assertMetadataIsCorrectlyLoaded(track_info)
 
     def test_givenNoMatchingMetadataReadingStrategy_whenReadingMetadata_thenThrowUnknownAudioFileFormatException(self):
-        self.metadataReader = MetadataReader([])
+        self.metadataReader = MetadataReader([], MetadataDefaultValues())
 
         with self.assertRaises(UnknownAudioFileFormatException):
             self.metadataReader.read_metadata(FILE)
@@ -46,6 +47,6 @@ class MetadataReaderTest(unittest.TestCase):
         self.assertEqual(ARTIST, track_info.artist)
         self.assertEqual(TITLE, track_info.title)
         self.assertAlmostEqual(LENGTH, track_info.length, delta=0.01)
-        self.assertEqual(TRACK_NUMBER, track_info.number)
-        self.assertEqual(TOTAL_TRACKS, track_info.tracks_on_disc)
+        self.assertEqual(TRACK_NUMBER, track_info.track_number)
+        self.assertEqual(TOTAL_TRACKS, track_info.total_tracks)
         self.assertEqual(ALBUM, track_info.album)
