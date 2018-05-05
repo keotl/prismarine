@@ -9,6 +9,8 @@ from jivago.lang.stream import Stream
 from prismarine.media_info.album_info import AlbumInfo
 from prismarine.media_info.media_info import MediaInfo
 from prismarine.media_info.media_library import MediaLibrary
+from prismarine.media_info.no_such_album_exception import NoSuchAlbumException
+from prismarine.media_info.no_such_track_exception import NoSuchTrackException
 from prismarine.media_info.track_info import TrackInfo
 
 
@@ -44,3 +46,17 @@ class InMemoryMediaLibrary(MediaLibrary):
     @Override
     def search_albums(self, query: str) -> List[AlbumInfo]:
         return Stream(self.content['albums'].values()).filter(lambda a: query.lower() in a.name.lower()).toList()
+
+    @Override
+    def get_album(self, id) -> AlbumInfo:
+        if id in self.content['albums']:
+            return self.content['albums'][id]
+        else:
+            raise NoSuchAlbumException(id)
+
+    @Override
+    def get_track(self, id) -> TrackInfo:
+        if id in self.content['tracks']:
+            return self.content['tracks'][id]
+        else:
+            raise NoSuchTrackException(id)

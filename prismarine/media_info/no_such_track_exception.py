@@ -1,0 +1,2 @@
+class NoSuchTrackException(Exception):
+    pass

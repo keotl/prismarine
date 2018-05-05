@@ -4,17 +4,17 @@ from jivago.wsgi.annotations import Resource, Path
 from jivago.wsgi.methods import GET
 
 from prismarine.media_info.media_library import MediaLibrary
-from prismarine.resource.mapper.album_mapper import AlbumMapper
-from prismarine.resource.mapper.track_mapper import TrackMapper
-from prismarine.resource.model.album_search import AlbumSearch
-from prismarine.resource.model.track_search import TrackSearch
+from prismarine.resource.mapper.album_search_mapper import AlbumSearchMapper
+from prismarine.resource.mapper.track_search_mapper import TrackMapper
+from prismarine.resource.model.search.album_search import AlbumSearch
+from prismarine.resource.model.search.track_search import TrackSearch
 
 
 @Resource("/search")
 class SearchResource(object):
 
     @Inject
-    def __init__(self, media_library: MediaLibrary, track_mapper: TrackMapper, album_mapper: AlbumMapper):
+    def __init__(self, media_library: MediaLibrary, track_mapper: TrackMapper, album_mapper: AlbumSearchMapper):
         self.album_mapper = album_mapper
         self.track_mapper = track_mapper
         self.media_library = media_library

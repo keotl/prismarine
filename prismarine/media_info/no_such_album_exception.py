@@ -1,0 +1,2 @@
+class NoSuchAlbumException(Exception):
+    pass

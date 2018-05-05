@@ -16,4 +16,4 @@ class AlbumInfo(MediaInfo):
         return self.folder_path in track.filename and self.name.lower() == track.album.lower()
 
     def add_track(self, track: TrackInfo):
-        self.tracks.append(track.id)
+        self.tracks.append(track)

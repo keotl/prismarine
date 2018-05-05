@@ -15,3 +15,9 @@ class MediaLibrary(object):
 
     def search_albums(self, query: str) -> List[AlbumInfo]:
         raise NotImplementedError
+
+    def get_album(self, id) -> AlbumInfo:
+        raise NotImplementedError
+
+    def get_track(self, id) -> TrackInfo:
+        raise NotImplementedError
