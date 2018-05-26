@@ -16,6 +16,7 @@ class AlbumMapper(object):
 
     def to_model(self, album: AlbumInfo) -> AlbumModel:
         tracks = Stream(album.tracks).map(lambda t: self.track_mapper.to_model(t)).toList()
+        tracks.sort(key=lambda t: t.track_number)
         return AlbumModel(
             str(album.id),
             album.name,

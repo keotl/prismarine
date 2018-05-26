@@ -13,4 +13,5 @@ class TrackMapper(object):
                           track_info.album,
                           track_info.genre,
                           track_info.artist,
-                          track_info.length)
+                          track_info.length,
+                          track_info.track_number)
