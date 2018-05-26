@@ -14,9 +14,9 @@ from prismarine.media_info.media_library import MediaLibrary
 class MediaIndexer(object):
 
     @Inject
-    def __init__(self, media_repository: MediaLibrary, metadata_reader: MetadataReader):
+    def __init__(self, media_library: MediaLibrary, metadata_reader: MetadataReader):
         self.metadata_reader = metadata_reader
-        self.media_repository = media_repository
+        self.media_repository = media_library
 
     def index_tracks(self, folder_path: str):
         files = Stream(glob.glob(os.path.join(folder_path, '**/*'), recursive=True)).filter(

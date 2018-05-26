@@ -11,4 +11,5 @@ class MediaLibraryInitializer(object):
         self.media_indexer = media_indexer
 
     def __call__(self):
-        self.media_indexer.index_tracks("/home/atreides/Desktop/flac")
+        self.media_indexer.index_tracks("/home/atreides/Music")
+        print("done initializing media library")

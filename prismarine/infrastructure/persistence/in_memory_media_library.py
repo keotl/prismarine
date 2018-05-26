@@ -3,7 +3,7 @@ import uuid
 from typing import List
 
 from jivago.inject.registry import Singleton
-from jivago.lang.annotations import Override
+from jivago.lang.annotations import Override, Inject
 from jivago.lang.stream import Stream
 
 from prismarine.media_info.album_info import AlbumInfo
@@ -17,6 +17,7 @@ from prismarine.media_info.track_info import TrackInfo
 @Singleton
 class InMemoryMediaLibrary(MediaLibrary):
 
+    @Inject
     def __init__(self):
         self.content = {'tracks': {}, 'albums': {}}
 
