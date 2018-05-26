@@ -1,8 +1,8 @@
 import glob
-
 import os
-from jivago.inject.registry import Component
+
 from jivago.lang.annotations import Inject
+from jivago.lang.registry import Component
 from jivago.lang.stream import Stream
 
 from prismarine.filesystem.tags.metadata_reader import MetadataReader
@@ -28,5 +28,3 @@ class MediaIndexer(object):
                 self.media_repository.save_track(track_info)
             except UnknownAudioFileFormatException:
                 continue
-
-        print("hello")

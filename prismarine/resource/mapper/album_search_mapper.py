@@ -1,4 +1,4 @@
-from jivago.inject.registry import Component
+from jivago.lang.registry import Component
 
 from prismarine.media_info.album_info import AlbumInfo
 from prismarine.resource.model.search.album_result import AlbumResult

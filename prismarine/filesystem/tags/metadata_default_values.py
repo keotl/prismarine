@@ -1,4 +1,4 @@
-from jivago.inject.registry import Component
+from jivago.lang.registry import Component
 
 
 @Component

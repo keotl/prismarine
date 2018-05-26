@@ -1,8 +1,8 @@
 from typing import List
 
 import mutagen
-from jivago.inject.registry import Component
 from jivago.lang.annotations import Inject
+from jivago.lang.registry import Component
 from jivago.lang.stream import Stream
 
 from prismarine.filesystem.tags.metadata_default_values import MetadataDefaultValues

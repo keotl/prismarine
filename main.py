@@ -1,5 +1,5 @@
-from jivago.inject.registry import Registry
 from jivago.jivago_application import JivagoApplication
+from jivago.lang.registry import Registry
 
 import prismarine
 from prismarine.infrastructure.config.prismarine_context import PrismarineContext

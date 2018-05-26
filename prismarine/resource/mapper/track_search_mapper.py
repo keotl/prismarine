@@ -1,4 +1,4 @@
-from jivago.inject.registry import Component
+from jivago.lang.registry import Component
 
 from prismarine.media_info.track_info import TrackInfo
 from prismarine.resource.model.track_result import TrackModel

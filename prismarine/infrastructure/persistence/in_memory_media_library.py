@@ -2,8 +2,8 @@ import os
 import uuid
 from typing import List
 
-from jivago.inject.registry import Singleton
 from jivago.lang.annotations import Override, Inject
+from jivago.lang.registry import Singleton
 from jivago.lang.stream import Stream
 
 from prismarine.media_info.album_info import AlbumInfo
@@ -49,14 +49,14 @@ class InMemoryMediaLibrary(MediaLibrary):
         return Stream(self.content['albums'].values()).filter(lambda a: query.lower() in a.name.lower()).toList()
 
     @Override
-    def get_album(self, id) -> AlbumInfo:
+    def get_album(self, id: uuid.UUID) -> AlbumInfo:
         if id in self.content['albums']:
             return self.content['albums'][id]
         else:
             raise NoSuchAlbumException(id)
 
     @Override
-    def get_track(self, id) -> TrackInfo:
+    def get_track(self, id: uuid.UUID) -> TrackInfo:
         if id in self.content['tracks']:
             return self.content['tracks'][id]
         else:

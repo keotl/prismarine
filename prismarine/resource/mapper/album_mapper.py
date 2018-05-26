@@ -1,5 +1,5 @@
-from jivago.inject.registry import Component
 from jivago.lang.annotations import Inject
+from jivago.lang.registry import Component
 from jivago.lang.stream import Stream
 
 from prismarine.media_info.album_info import AlbumInfo
