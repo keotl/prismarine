@@ -40,3 +40,9 @@ class MetadataReadingStrategy(object):
 
     def get_release_year(self, audio_file: FileType) -> int:
         raise NotImplementedError
+
+    def get_or_none(self, audio_file: FileType, key: str) -> str:
+        return audio_file.get(key)[0] if audio_file.get(key) else None
+
+    def get_numeric_or_none(self, audio_file: FileType, key: str) -> int:
+        return int(audio_file.get(key)[0]) if audio_file.get(key) else None
