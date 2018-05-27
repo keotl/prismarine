@@ -6,7 +6,6 @@ from mutagen.mp3 import MP3
 from prismarine.filesystem.tags.metadata_reading_strategy import MetadataReadingStrategy
 
 
-@Component
 class Mp3MetadataReadingStrategy(MetadataReadingStrategy):
 
     @Override

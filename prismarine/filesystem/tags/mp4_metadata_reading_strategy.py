@@ -74,7 +74,7 @@ class Mp4MetadataReadingStrategy(MetadataReadingStrategy):
     @Override
     def get_release_year(self, audio_file: FileType) -> int:
         try:
-            day = audio_file['©day']
+            day = audio_file['©day'][0]
             return datetime.strptime(day, '%Y-%m-%dT%H:%M:%SZ').year
         except:
             return None
