@@ -25,4 +25,5 @@ class AlbumMapper(object):
             album.artist,
             album.release_year,
             tracks,
-            "/media/artwork/{}".format(album.id) if self.artwork_repository.has_artwork_for(album.id) else '')
+            "/media/artwork/{}".format(album.id) if self.artwork_repository.has_artwork_for(album.id) else '',
+            album.genre)

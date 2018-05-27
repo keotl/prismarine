@@ -38,8 +38,8 @@ class MediaIndexer(object):
                 artwork = self.artwork_reader.get_artwork(file)
                 if artwork is None:
                     artwork = self.local_folder_artwork_reader.get_artwork(album)
-
-                self.artwork_repository.save(album.id, artwork)
+                if artwork is not None:
+                    self.artwork_repository.save(album.id, artwork)
 
             except UnknownAudioFileFormatException:
                 continue

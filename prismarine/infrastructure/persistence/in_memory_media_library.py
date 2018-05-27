@@ -36,7 +36,7 @@ class InMemoryMediaLibrary(MediaLibrary):
                 track.set_album_id(album.id)
                 return
         new_album = AlbumInfo(uuid.uuid4(), track.album, track.artist, os.path.dirname(track.filename),
-                              track.total_tracks, track.release_year)
+                              track.total_tracks, track.release_year, track.genre)
         new_album.add_track(track)
         track.set_album_id(new_album.id)
         self.content['albums'][new_album.id] = new_album
