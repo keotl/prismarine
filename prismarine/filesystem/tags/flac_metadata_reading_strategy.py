@@ -3,6 +3,7 @@ from jivago.lang.registry import Component
 from mutagen import FileType
 from mutagen.flac import FLAC
 
+from prismarine.filesystem.tags.artwork import Artwork
 from prismarine.filesystem.tags.metadata_reading_strategy import MetadataReadingStrategy
 
 
@@ -44,6 +45,20 @@ class FlacMetadataReadingStrategy(MetadataReadingStrategy):
     @Override
     def get_title(self, audio_file: FileType) -> str:
         return self.get_or_none(audio_file, 'title')
+
+    @Override
+    def get_cover_art(self, audio_file: FileType) -> Artwork:
+        if len(audio_file.pictures) > 0:
+            return Artwork(audio_file.pictures[0].mime, audio_file.pictures[0].data)
+        return None
+
+    @Override
+    def get_release_year(self, audio_file: FileType) -> int:
+        return self.get_numeric_or_none(audio_file, "date")
+
+    @Override
+    def get_disc_number(self, audio_file: FileType) -> int:
+        return self.get_numeric_or_none(audio_file, "discnumber")
 
     def get_or_none(self, audio_file: FileType, key: str) -> str:
         return audio_file.get(key)[0] if audio_file.get(key) else None

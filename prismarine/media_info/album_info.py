@@ -4,7 +4,8 @@ from prismarine.media_info.track_info import TrackInfo
 
 class AlbumInfo(MediaInfo):
 
-    def __init__(self, id, name: str, artist: str, folder_path: str, track_count: int):
+    def __init__(self, id, name: str, artist: str, folder_path: str, track_count: int, release_year: int):
+        self.release_year = release_year
         self.track_count = track_count
         self.folder_path = folder_path
         self.name = name

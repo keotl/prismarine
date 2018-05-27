@@ -10,3 +10,5 @@ class MetadataDefaultValues(object):
     genre = 'Other'
     track_number = 0
     total_tracks = 0
+    disc_number = 1
+    release_year = 0

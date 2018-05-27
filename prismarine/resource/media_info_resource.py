@@ -31,3 +31,4 @@ class MediaInfoResource(object):
     def get_track(self, track_id: str) -> TrackModel:
         track = self.media_library.get_track(UUID(track_id))
         return self.track_mapper.to_model(track)
+

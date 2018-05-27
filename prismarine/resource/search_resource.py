@@ -9,6 +9,8 @@ from prismarine.resource.mapper.track_search_mapper import TrackMapper
 from prismarine.resource.model.search.album_search import AlbumSearch
 from prismarine.resource.model.search.track_search import TrackSearch
 
+MAX_RESULTS = 3
+
 
 @Resource("/search")
 class SearchResource(object):
@@ -23,10 +25,15 @@ class SearchResource(object):
     @Path("/tracks")
     def search_by_track_title(self, q: str) -> TrackSearch:
         tracks = self.media_library.search_tracks_by_title(q)
+        if len(tracks) > MAX_RESULTS:
+            tracks = tracks[:MAX_RESULTS]
         return TrackSearch(Stream(tracks).map(lambda t: self.track_mapper.to_model(t)).toList())
 
     @GET
     @Path("/albums")
     def search_by_album(self, q: str) -> AlbumSearch:
         albums = self.media_library.search_albums(q)
+        if len(albums) > MAX_RESULTS:
+            albums = albums[:MAX_RESULTS]
+
         return AlbumSearch(Stream(albums).map(lambda a: self.album_mapper.to_model(a)).toList())

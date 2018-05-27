@@ -1,0 +1,2 @@
+class NoSuchArtworkException(Exception):
+    pass

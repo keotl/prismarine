@@ -1,4 +1,5 @@
 from typing import List
+from uuid import UUID
 
 from prismarine.media_info.album_info import AlbumInfo
 from prismarine.media_info.media_info import MediaInfo
@@ -16,8 +17,11 @@ class MediaLibrary(object):
     def search_albums(self, query: str) -> List[AlbumInfo]:
         raise NotImplementedError
 
-    def get_album(self, id) -> AlbumInfo:
+    def get_album(self, id: UUID) -> AlbumInfo:
         raise NotImplementedError
 
-    def get_track(self, id) -> TrackInfo:
+    def get_track(self, id: UUID) -> TrackInfo:
+        raise NotImplementedError
+
+    def get_album_for_track(self, track_id: UUID) -> AlbumInfo:
         raise NotImplementedError

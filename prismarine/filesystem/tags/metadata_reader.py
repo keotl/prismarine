@@ -39,7 +39,9 @@ class MetadataReader(object):
                                       "genre": metadata_reading_strategy.get_genre(audio_file),
                                       "track_number": metadata_reading_strategy.get_track_number(audio_file),
                                       "total_tracks": metadata_reading_strategy.get_total_tracks(audio_file),
-                                      "filename": audio_file.filename
+                                      "filename": audio_file.filename,
+                                      "disc_number": metadata_reading_strategy.get_disc_number(audio_file),
+                                      "release_year": metadata_reading_strategy.get_release_year(audio_file)
                                   }
                                   .items()).map(lambda k, v: (k, v if v else self._default_value(k))).toDict()
         return TrackInfo(**track_attributes)

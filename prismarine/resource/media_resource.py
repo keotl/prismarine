@@ -6,6 +6,7 @@ from jivago.wsgi.methods import GET
 from jivago.wsgi.request.request import Request
 from jivago.wsgi.request.response import Response
 
+from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
 from prismarine.filesystem.media.media_file_retriever import MediaFileRetriever
 
 
@@ -13,7 +14,8 @@ from prismarine.filesystem.media.media_file_retriever import MediaFileRetriever
 class MediaResource(object):
 
     @Inject
-    def __init__(self, media_file_retriever: MediaFileRetriever):
+    def __init__(self, media_file_retriever: MediaFileRetriever, artwork_repository: CoverArtRepository):
+        self.artwork_repository = artwork_repository
         self.media_file_retriever = media_file_retriever
 
     @GET
@@ -32,3 +34,9 @@ class MediaResource(object):
                                   "Content-Length": end - start + 1},
                             body[start:end + 1])
         return Response(200, {"Content-Type": "application/octet-stream"}, body)
+
+    @GET
+    @Path("/artwork/{album_id}")
+    def get_album_artwork(self, album_id: str) -> Response:
+        artwork = self.artwork_repository.get_artwork(UUID(album_id))
+        return Response(200, {'Content-Type': artwork.mime_type}, artwork.data)

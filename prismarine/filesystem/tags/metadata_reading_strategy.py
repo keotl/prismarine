@@ -1,5 +1,7 @@
 from mutagen import FileType
 
+from prismarine.filesystem.tags.artwork import Artwork
+
 
 class MetadataReadingStrategy(object):
 
@@ -28,4 +30,13 @@ class MetadataReadingStrategy(object):
         raise NotImplementedError
 
     def get_title(self, audio_file: FileType) -> str:
+        raise NotImplementedError
+
+    def get_cover_art(self, audio_file: FileType) -> Artwork:
+        raise NotImplementedError
+
+    def get_disc_number(self, audio_file: FileType) -> int:
+        raise NotImplementedError
+
+    def get_release_year(self, audio_file: FileType) -> int:
         raise NotImplementedError

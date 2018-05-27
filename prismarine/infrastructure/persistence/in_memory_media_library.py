@@ -33,10 +33,12 @@ class InMemoryMediaLibrary(MediaLibrary):
         for album in self.content['albums'].values():
             if album.should_contain(track):
                 album.add_track(track)
+                track.set_album_id(album.id)
                 return
         new_album = AlbumInfo(uuid.uuid4(), track.album, track.artist, os.path.dirname(track.filename),
-                              track.total_tracks)
+                              track.total_tracks, track.release_year)
         new_album.add_track(track)
+        track.set_album_id(new_album.id)
         self.content['albums'][new_album.id] = new_album
 
     @Override
@@ -61,3 +63,11 @@ class InMemoryMediaLibrary(MediaLibrary):
             return self.content['tracks'][id]
         else:
             raise NoSuchTrackException(id)
+
+    @Override
+    def get_album_for_track(self, track_id: uuid.UUID) -> AlbumInfo:
+        track = self.get_track(track_id)
+        album = Stream(self.content['albums'].values()).firstMatch(lambda album: album.should_contain(track))
+        if album is None:
+            raise NoSuchAlbumException()
+        return album
