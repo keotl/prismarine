@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from prismarine.media_info.media_info import MediaInfo
 from prismarine.media_info.track_info import TrackInfo
 
@@ -12,6 +14,7 @@ class AlbumInfo(MediaInfo):
         self.artist = artist
         self.tracks = []
         self.genre = genre
+        self.artist_id = None
         super().__init__(id)
 
     def should_contain(self, track: TrackInfo) -> bool:
@@ -19,3 +22,6 @@ class AlbumInfo(MediaInfo):
 
     def add_track(self, track: TrackInfo):
         self.tracks.append(track)
+
+    def set_artist_id(self, artist_id: UUID):
+        self.artist_id = artist_id
