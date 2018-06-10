@@ -2,7 +2,7 @@ from typing import List
 
 from jivago.lang.annotations import Serializable
 
-from prismarine.resource.model.track_result import TrackModel
+from prismarine.resource.model.track_model import TrackModel
 
 
 @Serializable

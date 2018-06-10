@@ -6,7 +6,7 @@ from jivago.wsgi.methods import GET
 from prismarine.media_info.media_library import MediaLibrary
 from prismarine.resource.mapper.album_search_mapper import AlbumSearchMapper
 from prismarine.resource.mapper.artist_search_mapper import ArtistSearchMapper
-from prismarine.resource.mapper.track_search_mapper import TrackMapper
+from prismarine.resource.mapper.track_mapper import TrackMapper
 from prismarine.resource.model.search.album_search import AlbumSearch
 from prismarine.resource.model.search.artist_search import ArtistSearch
 from prismarine.resource.model.search.track_search import TrackSearch

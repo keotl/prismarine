@@ -7,10 +7,10 @@ from jivago.wsgi.methods import GET
 from prismarine.media_info.media_library import MediaLibrary
 from prismarine.resource.mapper.album_mapper import AlbumMapper
 from prismarine.resource.mapper.artist_mapper import ArtistMapper
-from prismarine.resource.mapper.track_search_mapper import TrackMapper
+from prismarine.resource.mapper.track_mapper import TrackMapper
 from prismarine.resource.model.album_model import AlbumModel
 from prismarine.resource.model.artist_model import ArtistModel
-from prismarine.resource.model.track_result import TrackModel
+from prismarine.resource.model.track_model import TrackModel
 
 
 @Resource("/info")

@@ -4,7 +4,7 @@ from jivago.lang.stream import Stream
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
 from prismarine.media_info.album_info import AlbumInfo
-from prismarine.resource.mapper.track_search_mapper import TrackMapper
+from prismarine.resource.mapper.track_mapper import TrackMapper
 from prismarine.resource.model.album_model import AlbumModel
 
 
