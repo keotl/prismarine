@@ -6,6 +6,7 @@ from jivago.lang.registry import Component
 from jivago.lang.stream import Stream
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
+from prismarine.filesystem.media.last_fm_image_provider import LastFmImageProvider
 from prismarine.filesystem.media.local_folder_artwork_reader import LocalFolderArtworkReader
 from prismarine.filesystem.tags.artwork_reader import ArtworkReader
 from prismarine.filesystem.tags.metadata_reader import MetadataReader
@@ -19,7 +20,8 @@ class MediaIndexer(object):
     @Inject
     def __init__(self, media_library: MediaLibrary, metadata_reader: MetadataReader,
                  artwork_repository: CoverArtRepository, artwork_reader: ArtworkReader,
-                 local_folder_artwork_reader: LocalFolderArtworkReader):
+                 local_folder_artwork_reader: LocalFolderArtworkReader, last_fm_image_provider: LastFmImageProvider):
+        self.last_fm_image_provider = last_fm_image_provider
         self.local_folder_artwork_reader = local_folder_artwork_reader
         self.artwork_reader = artwork_reader
         self.artwork_repository = artwork_repository
@@ -40,6 +42,11 @@ class MediaIndexer(object):
                     artwork = self.local_folder_artwork_reader.get_artwork(album)
                 if artwork is not None:
                     self.artwork_repository.save(album.id, artwork)
+
+                artist_artwork = self.last_fm_image_provider.get_artist_image(album.artist)
+
+                if artist_artwork is not None:
+                    self.artwork_repository.save(album.artist_id, artist_artwork)
 
             except UnknownAudioFileFormatException:
                 continue
