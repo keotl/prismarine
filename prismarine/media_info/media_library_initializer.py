@@ -1,10 +1,11 @@
-from jivago.lang.annotations import BackgroundWorker, Inject, Override
+from jivago.config.startup_hooks import Init
+from jivago.lang.annotations import Inject, Override
 from jivago.lang.runnable import Runnable
 
 from prismarine.filesystem.media_indexer import MediaIndexer
 
 
-@BackgroundWorker
+@Init
 class MediaLibraryInitializer(Runnable):
 
     @Inject
