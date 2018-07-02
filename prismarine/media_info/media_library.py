@@ -32,3 +32,6 @@ class MediaLibrary(object):
 
     def search_artists(self, query: str) -> List[ArtistInfo]:
         raise NotImplementedError
+
+    def contains_file(self, filename: str) -> bool:
+        raise NotImplementedError

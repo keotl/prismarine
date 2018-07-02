@@ -95,3 +95,7 @@ class InMemoryMediaLibrary(MediaLibrary):
     @Override
     def search_artists(self, query: str) -> List[ArtistInfo]:
         return Stream(self.content['artists'].values()).filter(lambda a: query.lower() in a.name.lower()).toList()
+
+    @Override
+    def contains_file(self, filename: str) -> bool:
+        return Stream(self.content['tracks'].values()).anyMatch(lambda track: track.filename == filename)

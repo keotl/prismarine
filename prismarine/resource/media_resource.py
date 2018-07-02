@@ -8,6 +8,7 @@ from jivago.wsgi.request.request import Request
 from jivago.wsgi.request.response import Response
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
+from prismarine.filesystem.media.track_transcoder import TrackTranscoder
 from prismarine.media_info.media_library import MediaLibrary
 
 
@@ -15,7 +16,9 @@ from prismarine.media_info.media_library import MediaLibrary
 class MediaResource(object):
 
     @Inject
-    def __init__(self, artwork_repository: CoverArtRepository, media_library: MediaLibrary, partial_content_handler: PartialContentHandler):
+    def __init__(self, artwork_repository: CoverArtRepository, media_library: MediaLibrary, partial_content_handler: PartialContentHandler,
+                 track_transocder: TrackTranscoder):
+        self.track_transocder = track_transocder
         self.partial_content_handler = partial_content_handler
         self.media_library = media_library
         self.artwork_repository = artwork_repository
@@ -23,8 +26,9 @@ class MediaResource(object):
     @GET
     @Path("/track/{track_id}")
     def get_track(self, track_id: str, request: Request) -> Response:
-        filename = self.media_library.get_track(UUID(track_id)).filename
-        return self.partial_content_handler.handle_partial_content_request(request, filename)
+        track = self.media_library.get_track(UUID(track_id))
+        transcoded_track_file = self.track_transocder.transcode_track(track)
+        return self.partial_content_handler.handle_partial_content_request(request, transcoded_track_file)
 
     @GET
     @Path("/artwork/{album_id}")
