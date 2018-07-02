@@ -16,7 +16,7 @@ class LocalFolderArtworkReader(object):
     def get_artwork(self, album: AlbumInfo) -> Artwork:
 
         for extension, mime_type in picture_file_extensions:
-            files = glob.glob(os.path.join(album.folder_path, '**/{}'.format(extension)))
+            files = glob.glob(os.path.join(album.folder_path, extension))
             if len(files) > 0:
                 with open(files[0], 'rb') as f:
                     return Artwork(mime_type, f.read())

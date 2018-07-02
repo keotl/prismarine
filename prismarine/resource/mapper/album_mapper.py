@@ -4,7 +4,7 @@ from jivago.lang.stream import Stream
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
 from prismarine.media_info.album_info import AlbumInfo
-from prismarine.resource.mapper.track_search_mapper import TrackMapper
+from prismarine.resource.mapper.track_mapper import TrackMapper
 from prismarine.resource.model.album_model import AlbumModel
 
 
@@ -26,4 +26,5 @@ class AlbumMapper(object):
             album.release_year,
             tracks,
             "/media/artwork/{}".format(album.id) if self.artwork_repository.has_artwork_for(album.id) else '',
-            album.genre)
+            album.genre,
+            str(album.artist_id))

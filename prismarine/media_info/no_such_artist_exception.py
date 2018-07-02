@@ -1,0 +1,2 @@
+class NoSuchArtistException(Exception):
+    pass

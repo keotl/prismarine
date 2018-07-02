@@ -19,7 +19,11 @@ class TrackInfo(MediaInfo):
         self.disc_number = disc_number
         self.release_year = release_year
         self.album_id = None
+        self.artist_id = None
         super().__init__(id)
 
     def set_album_id(self, album_id: UUID):
         self.album_id = album_id
+
+    def set_artist_id(self, artist_id: UUID):
+        self.artist_id = artist_id

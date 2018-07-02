@@ -3,7 +3,7 @@ from jivago.lang.registry import Component
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
 from prismarine.media_info.track_info import TrackInfo
-from prismarine.resource.model.track_result import TrackModel
+from prismarine.resource.model.track_model import TrackModel
 
 
 @Component
@@ -23,4 +23,5 @@ class TrackMapper(object):
                           track_info.track_number,
                           track_info.disc_number,
                           '/media/artwork/{}'.format(track_info.album_id) if self.artwork_repository.has_artwork_for(
-                              track_info.album_id) else '')
+                              track_info.album_id) else '',
+                          track_info.album)
