@@ -35,3 +35,9 @@ class MediaLibrary(object):
 
     def contains_file(self, filename: str) -> bool:
         raise NotImplementedError
+
+    def get_all_albums(self) -> List[AlbumInfo]:
+        raise NotImplementedError
+
+    def get_all_artists(self) -> List[ArtistInfo]:
+        raise NotImplementedError
