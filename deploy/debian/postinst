@@ -6,7 +6,7 @@ ln -s /etc/nginx/sites-available/prismarine /etc/nginx/sites-enabled/prismarine
 useradd prismarine
 chown -R prismarine:prismarine /usr/lib/prismarine-server
 
-unlink /etc/nginx/sites-enabled/default
+unlink /etc/nginx/sites-enabled/default || true
 
 systemctl enable prismarine
 systemctl start prismarine
