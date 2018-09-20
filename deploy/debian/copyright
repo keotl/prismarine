@@ -1,0 +1,10 @@
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: prismarine
+Upstream-Contact: Kento A. Lauzon <kento.lauzon@ligature.ca>
+
+Source: https://github.com/keotl/prismarine
+#
+# Please double check copyright with the licensecheck(1) command.
+Files: *
+License: GPL-3.0
+Copyright: 2018 Kento A. Lauzon <kento.lauzon@ligature.ca>

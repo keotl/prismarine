@@ -1,5 +1,12 @@
-<span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; white-space: pre;">Package: prismarine
-</span><span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; white-space: pre;">Version: 0.0.1
-</span><span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; white-space: pre;">Maintainer: Kento A. Lauzon
-</span><span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; white-space: pre;">Architecture: all
-</span><span class="Apple-style-span" style="font-family: Consolas, Monaco, monospace; font-size: 12px; white-space: pre;">Description: prismarine server
+Source: prismarine
+Section: unknown
+Priority: optional
+Maintainer: Kento A. Lauzon <kento.lauzon@ligature.ca>
+Build-Depends: debhelper (>=10)
+Standards-Version: 4.0.0
+Homepage: https://github.com/keotl/prismarine
+Package: prismarine
+Architecture: all
+Depends: ffmpeg, nginx, virtualenv
+Version: 0.0.0
+Description: prismarine server

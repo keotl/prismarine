@@ -1,0 +1,6 @@
+prismarine (0.0-1) UNRELEASED; urgency=low
+
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
+
+ -- Kento A. Lauzon <kento.lauzon@ligature.ca>  Thu, 20 Sep 2018 08:35:47 -0400
