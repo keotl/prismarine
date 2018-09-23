@@ -4,7 +4,7 @@ coverage==4.5.1
 croniter==0.3.24
 idna==2.6
 Jinja2==2.10
-jivago==0.2.2
+jivago==0.3.3
 MarkupSafe==1.0
 mutagen==1.40.0
 pathlib==1.0.1

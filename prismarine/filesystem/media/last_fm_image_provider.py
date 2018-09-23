@@ -18,6 +18,6 @@ class LastFmImageProvider(ArtistImageProvider):
             artwork_url = response.json()['artist']['image'][4]['#text']
             artwork_data = requests.request("GET", artwork_url)
             return Artwork(artwork_data.headers['Content-Type'], artwork_data.content)
-        except:
+        except KeyError:
             print("exceeded lastfm call limit.")
             return None
