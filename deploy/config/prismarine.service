@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 WorkingDirectory=/usr/lib/prismarine-server
 User=prismarine
-ExecStart=/usr/lib/prismarine-server/venv/bin/gunicorn --bind unix:/tmp/gunicorn.sock main:app
+ExecStart=/usr/lib/prismarine-server/venv/bin/gunicorn --bind unix:/tmp/gunicorn.sock main:app --threads 4
 
 
 [Install]
