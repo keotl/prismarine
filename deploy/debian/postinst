@@ -1,0 +1,13 @@
+#!/bin/sh
+virtualenv -p python3.6 /usr/lib/prismarine-server/venv
+/usr/lib/prismarine-server/venv/bin/pip install -r /usr/lib/prismarine-server/requirements.txt
+/usr/lib/prismarine-server/venv/bin/pip install gunicorn
+ln -s /etc/nginx/sites-available/prismarine /etc/nginx/sites-enabled/prismarine
+useradd prismarine
+chown -R prismarine:prismarine /usr/lib/prismarine-server
+
+unlink /etc/nginx/sites-enabled/default || true
+
+systemctl enable prismarine
+systemctl start prismarine
+systemctl restart nginx

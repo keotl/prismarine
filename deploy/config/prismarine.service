@@ -1,0 +1,13 @@
+[Unit]
+Description=Prismarine backend server
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/usr/lib/prismarine-server
+User=prismarine
+ExecStart=/usr/lib/prismarine-server/venv/bin/gunicorn --bind unix:/tmp/gunicorn.sock prismarine.wsgi:app
+
+
+[Install]
+WantedBy=multi-user.target

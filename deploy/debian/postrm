@@ -1,0 +1,3 @@
+#!/bin/sh
+rm -f /etc/nginx/sites-available/prismarine
+rm -rf /usr/lib/prismarine-server

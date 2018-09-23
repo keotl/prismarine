@@ -1,0 +1,12 @@
+Source: prismarine
+Section: unknown
+Priority: optional
+Maintainer: Kento A. Lauzon <kento.lauzon@ligature.ca>
+Build-Depends: debhelper (>=10)
+Standards-Version: 4.0.0
+Homepage: https://github.com/keotl/prismarine
+Package: prismarine
+Architecture: all
+Depends: ffmpeg, nginx, virtualenv
+Version: 0.0.0
+Description: prismarine server
