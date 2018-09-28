@@ -16,3 +16,5 @@ deploy:
   file: build/prismarine.deb
   on:
     repo: keotl/prismarine
+    tags: true
+  skip_cleanup: true
