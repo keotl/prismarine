@@ -8,4 +8,11 @@ script:
 branches:
   only:
   - master
-  - /^\d+\.\d+(\.\d+)?(-\S*)?$/
+  - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+deploy:
+  provider: releases
+  api_key:
+    secure: IWqb3PXJNqX7y2XqbU5/Hcjaxzb55N3tciSttov0qyEWpRZcTbGjKrzeksZIaxlX+KiG//JErKNI0Egs9C65QYk7mECboZYgfiE74FbmcNNNqdsAfHjhahw/lw7ywJJzyQzLziuHTnyeEs+WbqZKcL/zlFq9KtMbSKGAsVK8qKiGMYI99F2UBC4uR2xjG0l/RQ3nu/spWNzj6xk8tiS4cGpUeoQQ1jqboBThUVN1oILTC0cxn6B+qQD7CNROuKrTSLna7dgUptCSSo6q+L3UjOVgp73rXN2CWzoTPNdGbpTt4TEceRJc/dYl/l+iSHkWi2SRhsoTNWZ+xUzbRl7nYtZep+hzGeHXi6CUSSidZrcesqrgN8CBoTg8WsYfafrSOcKg0KmbDT55O71jfHcC7+ihbjIMONeOnVHfChw93gnsxm76ikXnTRdhcQ7LRnS5/1lLZ8DbhOyfQlqKKqwT0cBANzMvjYui10fpjud7IB0f4LdK3fuEejf6fGnon+Wvq9fT/tE6nR56XQxdyNq3iFavnd5vu7TJPOt6cVjyBBkY9/+Zr9JBXpnZQELXdd1R+OVJjcsTjdiU/FJz46CrrvlOq0oKoI6NMQvmIBgz0XPqznPCTSPtRGuxngnr0dEiABstXjRVu/HheR3PvDNQ8yOjmsfYxaXPFvjlFi2zc6M=
+  file: build/prismarine.deb
+  on:
+    repo: keotl/prismarine
