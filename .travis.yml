@@ -8,4 +8,15 @@ script:
 branches:
   only:
   - master
-  - /^\d+\.\d+(\.\d+)?(-\S*)?$/
+  - "/^\\d+\\.\\d+(\\.\\d+)?(-\\S*)?$/"
+before_deploy: "sh build-dpkg.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: "CIPLgxc4KcwlofcZEvdHjOfWI7HOrF5cI76/8B7X1qcdibfB6M6zWJitOG0i6bjQmwvSgsAW97peHIiMU22Vq5Wkev2cVreKQ2M+e8cR0KU2rQORjOw9J1STJatshhrs6rCGAMlh1VYlcMOQ1Ye4ji0noYzEDrwDrFgQJAHWhvl+jN3FhtVOl9H7eHrB/a0Cu4VkIMob9UWSN8egqKnAFmmBBpI9tyPZIiOB0Zl44G3QgC90vcclRRsHwjobk1IpWLer36AOaGl1c9KZWnrlPT2vy2zuTZNsyuYprLtMwqNwSnN2Lf4tjjRuKBjQc3umNIUvxK5qmIxHrHXOgLYDjrfRzbSBlBb9dhXzApbrnYMzOIzwtClJU69GH81/NOhqkv2uXMSISa09d7pgiLty8juaXMlf7iSOLbx7EtMgWwW7HMhU3KeydEOfUPowcI0EI7W516rKUM7MvyQ04eJslyagEJPAp1UGTNYCsMhVbLImcK5sBb8Vr4rflDGEFtBmQ5Xcxwsc+bvfzr/bntb3jP7Pbm+ubppYShbKQCV9ToTTbs6yKo3zLV7rGb0ThCsfC0X6mYljA8fugLRGVSqV+AhrRX++ZDKRgsE3WZyIzeUnsZcYgqDOOSoXrZf0zZh3TsU0Ot5cSjJG6HoQ+56fSPoYNgM+J4QxOA648Hz+Nz8="
+
+  file: build/prismarine.deb
+  on:
+    repo: keotl/prismarine
+    tags: true
+  skip_cleanup: true
