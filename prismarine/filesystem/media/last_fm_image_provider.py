@@ -1,5 +1,6 @@
 import requests
 from jivago.lang.registry import Component
+from requests.exceptions import MissingSchema
 
 from prismarine.filesystem.media.artist_image_provider import ArtistImageProvider
 from prismarine.filesystem.tags.artwork import Artwork
@@ -18,6 +19,6 @@ class LastFmImageProvider(ArtistImageProvider):
             artwork_url = response.json()['artist']['image'][4]['#text']
             artwork_data = requests.request("GET", artwork_url)
             return Artwork(artwork_data.headers['Content-Type'], artwork_data.content)
-        except KeyError:
+        except (KeyError, MissingSchema):
             print("exceeded lastfm call limit.")
             return None

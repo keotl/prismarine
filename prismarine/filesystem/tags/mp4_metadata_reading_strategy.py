@@ -1,7 +1,9 @@
 from datetime import datetime
+from typing import Callable
 
 from jivago.lang.annotations import Override
 from jivago.lang.registry import Component
+from jivago.lang.stream import Stream
 from mutagen import FileType
 from mutagen.mp4 import MP4
 
@@ -66,10 +68,9 @@ class Mp4MetadataReadingStrategy(MetadataReadingStrategy):
 
     @Override
     def get_disc_number(self, audio_file: FileType) -> int:
-        try:
-            return audio_file['disc'][0][0]
-        except:
-            return None
+        return Stream.of(lambda audio_file: audio_file['trkn'][0][1],
+                         lambda audio_file: audio_file['disk'][0][0]) \
+            .map(get_or_none).firstMatch(lambda x: x is not None)
 
     @Override
     def get_release_year(self, audio_file: FileType) -> int:
@@ -80,3 +81,10 @@ class Mp4MetadataReadingStrategy(MetadataReadingStrategy):
             return datetime.strptime(day, '%Y-%m-%dT%H:%M:%SZ').year
         except:
             return None
+
+
+def get_or_none(expression: Callable):
+    try:
+        return expression()
+    except:
+        return None
