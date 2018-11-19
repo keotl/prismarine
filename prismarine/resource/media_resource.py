@@ -3,7 +3,7 @@ from uuid import UUID
 from jivago.lang.annotations import Inject
 from jivago.wsgi.annotations import Resource, Path
 from jivago.wsgi.methods import GET
-from jivago.wsgi.partial_content_handler import PartialContentHandler
+from jivago.wsgi.request.partial_content_handler import PartialContentHandler
 from jivago.wsgi.request.request import Request
 from jivago.wsgi.request.response import Response
 
