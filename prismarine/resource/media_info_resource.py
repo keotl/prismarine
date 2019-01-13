@@ -2,6 +2,7 @@ from uuid import UUID
 
 from jivago.lang.annotations import Inject
 from jivago.wsgi.annotations import Resource, Path
+from jivago.wsgi.invocation.parameters import PathParam
 from jivago.wsgi.methods import GET
 
 from prismarine.media_info.media_library import MediaLibrary
@@ -25,18 +26,18 @@ class MediaInfoResource(object):
 
     @GET
     @Path("/album/{album_id}")
-    def get_album(self, album_id: str) -> AlbumModel:
+    def get_album(self, album_id: PathParam[str]) -> AlbumModel:
         album = self.media_library.get_album(UUID(album_id))
         return self.album_mapper.to_model(album)
 
     @GET
     @Path("/track/{track_id}")
-    def get_track(self, track_id: str) -> TrackModel:
+    def get_track(self, track_id: PathParam[str]) -> TrackModel:
         track = self.media_library.get_track(UUID(track_id))
         return self.track_mapper.to_model(track)
 
     @GET
     @Path("/artist/{artist_id}")
-    def get_artist(self, artist_id: str) -> ArtistModel:
+    def get_artist(self, artist_id: PathParam[str]) -> ArtistModel:
         artist = self.media_library.get_artist(UUID(artist_id))
         return self.artist_mapper.to_model(artist)

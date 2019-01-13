@@ -2,8 +2,8 @@ import os
 import subprocess
 
 from jivago.config.properties.application_properties import ApplicationProperties
+from jivago.inject.annotation import Component
 from jivago.lang.annotations import Inject
-from jivago.lang.registry import Component
 
 from prismarine.media_info.track_info import TrackInfo
 

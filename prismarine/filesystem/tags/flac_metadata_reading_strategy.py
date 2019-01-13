@@ -1,5 +1,5 @@
+from jivago.inject.annotation import Component
 from jivago.lang.annotations import Override
-from jivago.lang.registry import Component
 from mutagen import FileType
 from mutagen.flac import FLAC
 

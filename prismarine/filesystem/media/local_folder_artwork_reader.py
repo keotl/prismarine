@@ -1,7 +1,7 @@
 import glob
 import os
 
-from jivago.lang.registry import Component
+from jivago.inject.annotation import Component
 
 from prismarine.filesystem.tags.artwork import Artwork
 from prismarine.media_info.album_info import AlbumInfo

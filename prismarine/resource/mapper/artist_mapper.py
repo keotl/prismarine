@@ -1,5 +1,5 @@
+from jivago.inject.annotation import Component
 from jivago.lang.annotations import Inject
-from jivago.lang.registry import Component
 from jivago.lang.stream import Stream
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository

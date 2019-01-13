@@ -1,5 +1,4 @@
 from jivago.lang.annotations import Override
-from jivago.lang.registry import Component
 from mutagen import FileType
 from mutagen.mp3 import MP3
 

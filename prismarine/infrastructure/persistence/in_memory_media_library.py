@@ -2,8 +2,8 @@ import os
 import uuid
 from typing import List
 
+from jivago.inject.annotation import Singleton
 from jivago.lang.annotations import Override, Inject
-from jivago.lang.registry import Singleton
 from jivago.lang.stream import Stream
 
 from prismarine.media_info.album_info import AlbumInfo

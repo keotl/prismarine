@@ -1,5 +1,5 @@
 import requests
-from jivago.lang.registry import Component
+from jivago.inject.annotation import Component
 from requests.exceptions import MissingSchema
 
 from prismarine.filesystem.media.artist_image_provider import ArtistImageProvider

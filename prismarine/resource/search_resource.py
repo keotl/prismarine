@@ -1,6 +1,7 @@
 from jivago.lang.annotations import Inject
 from jivago.lang.stream import Stream
 from jivago.wsgi.annotations import Resource, Path
+from jivago.wsgi.invocation.parameters import QueryParam
 from jivago.wsgi.methods import GET
 
 from prismarine.media_info.media_library import MediaLibrary
@@ -18,7 +19,8 @@ MAX_RESULTS = 4
 class SearchResource(object):
 
     @Inject
-    def __init__(self, media_library: MediaLibrary, track_mapper: TrackMapper, album_mapper: AlbumSearchMapper, artist_mapper: ArtistSearchMapper):
+    def __init__(self, media_library: MediaLibrary, track_mapper: TrackMapper, album_mapper: AlbumSearchMapper,
+                 artist_mapper: ArtistSearchMapper):
         self.artist_mapper = artist_mapper
         self.album_mapper = album_mapper
         self.track_mapper = track_mapper
@@ -26,7 +28,7 @@ class SearchResource(object):
 
     @GET
     @Path("/tracks")
-    def search_by_track_title(self, q: str) -> TrackSearch:
+    def search_by_track_title(self, q: QueryParam[str]) -> TrackSearch:
         tracks = self.media_library.search_tracks_by_title(q)
         if len(tracks) > MAX_RESULTS:
             tracks = tracks[:MAX_RESULTS]
@@ -34,7 +36,7 @@ class SearchResource(object):
 
     @GET
     @Path("/albums")
-    def search_by_album(self, q: str) -> AlbumSearch:
+    def search_by_album(self, q: QueryParam[str]) -> AlbumSearch:
         albums = self.media_library.search_albums(q)
         if len(albums) > MAX_RESULTS:
             albums = albums[:MAX_RESULTS]
@@ -43,7 +45,7 @@ class SearchResource(object):
 
     @GET
     @Path("/artists")
-    def search_by_artist(self, q: str) -> ArtistSearch:
+    def search_by_artist(self, q: QueryParam[str]) -> ArtistSearch:
         artists = self.media_library.search_artists(q)
         if len(artists) > MAX_RESULTS:
             artists = artists[:MAX_RESULTS]

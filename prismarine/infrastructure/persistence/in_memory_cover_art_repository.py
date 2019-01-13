@@ -1,7 +1,7 @@
 from uuid import UUID
 
+from jivago.inject.annotation import Singleton
 from jivago.lang.annotations import Inject, Override
-from jivago.lang.registry import Singleton
 
 from prismarine.filesystem.media.cover_art_repository import CoverArtRepository
 from prismarine.filesystem.media.no_such_artwork_exception import NoSuchArtworkException

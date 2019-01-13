@@ -1,9 +1,7 @@
 from datetime import datetime
-from typing import Callable
 
+from jivago.inject.annotation import Component
 from jivago.lang.annotations import Override
-from jivago.lang.registry import Component
-from jivago.lang.stream import Stream
 from mutagen import FileType
 from mutagen.mp4 import MP4
 
