@@ -1,29 +1,20 @@
-import os
 import subprocess
 
-from jivago.config.properties.application_properties import ApplicationProperties
 from jivago.inject.annotation import Component
 from jivago.lang.annotations import Inject
 
-from prismarine.media_info.track_info import TrackInfo
+from prismarine.configuration.transcoding_settings import TranscodingSettings
 
 
 @Component
 class TrackTranscoder(object):
 
     @Inject
-    def __init__(self, application_properties: ApplicationProperties):
-        self.transcodedFileFolder = application_properties["transcoded_media_folder"]
-        self.streamingBitrate = application_properties["audio_bitrate"]
+    def __init__(self, transcoding_settings: TranscodingSettings):
+        self.transcodedFileFolder = transcoding_settings.transcoded_media_folder
+        self.streamingBitrate = transcoding_settings.audio_bitrate
 
-    def transcode_track(self, track_info: TrackInfo) -> str:
-        """:returns transcoded file path"""
-        transcoded_file_path = os.path.join(self.transcodedFileFolder, str(track_info.id))
-        if not os.path.exists(transcoded_file_path):
-            self.__ffmpeg_convert(track_info.filename, transcoded_file_path)
-        return transcoded_file_path
-
-    def __ffmpeg_convert(self, source_file: str, destination_file: str):
+    def transcode(self, source_file: str, destination_file: str):
         command = ["ffmpeg", "-i",
                    f"{source_file}",
                    "-vn",
