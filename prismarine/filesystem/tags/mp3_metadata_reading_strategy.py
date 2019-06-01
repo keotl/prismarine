@@ -2,6 +2,7 @@ from jivago.lang.annotations import Override
 from mutagen import FileType
 from mutagen.mp3 import MP3
 
+from prismarine.filesystem.tags.artwork import Artwork
 from prismarine.filesystem.tags.metadata_reading_strategy import MetadataReadingStrategy
 
 
@@ -42,3 +43,15 @@ class Mp3MetadataReadingStrategy(MetadataReadingStrategy):
     @Override
     def get_title(self, audio_file: FileType) -> str:
         return audio_file['TIT2'].text[0]
+
+    @Override
+    def get_cover_art(self, audio_file: FileType) -> Artwork:
+        raise NotImplementedError
+
+    @Override
+    def get_disc_number(self, audio_file: FileType) -> int:
+        raise NotImplementedError
+
+    @Override
+    def get_release_year(self, audio_file: FileType) -> int:
+        raise NotImplementedError
