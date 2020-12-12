@@ -3,6 +3,7 @@ from typing import List
 import mutagen
 from jivago.inject.annotation import Component
 from jivago.lang.annotations import Inject
+from jivago.lang.nullable import Nullable
 from jivago.lang.stream import Stream
 
 from prismarine.filesystem.tags.metadata_default_values import MetadataDefaultValues
@@ -23,25 +24,25 @@ class MetadataReader(object):
     def read_metadata(self, file_path: str) -> TrackInfo:
         audio_file = mutagen.File(file_path)
 
-        metadata_reading_strategy: MetadataReadingStrategy = Stream(self.reading_strategies).firstMatch(
+        metadata_reading_strategy: Nullable[MetadataReadingStrategy] = Stream(self.reading_strategies).firstMatch(
             lambda s: s.matches(audio_file))
 
-        if metadata_reading_strategy is None:
+        if not metadata_reading_strategy.isPresent():
             raise UnknownAudioFileFormatException()
-
+        reader = metadata_reading_strategy.get()
         track_attributes = Stream({
                                       "id": None,
-                                      "title": metadata_reading_strategy.get_title(audio_file),
-                                      "artist": metadata_reading_strategy.get_artist(audio_file),
-                                      "album": metadata_reading_strategy.get_album(audio_file),
-                                      "length": metadata_reading_strategy.get_length(audio_file),
-                                      "format": metadata_reading_strategy.get_format(audio_file),
-                                      "genre": metadata_reading_strategy.get_genre(audio_file),
-                                      "track_number": metadata_reading_strategy.get_track_number(audio_file),
-                                      "total_tracks": metadata_reading_strategy.get_total_tracks(audio_file),
+                                      "title": reader.get_title(audio_file),
+                                      "artist": reader.get_artist(audio_file),
+                                      "album": reader.get_album(audio_file),
+                                      "length": reader.get_length(audio_file),
+                                      "format": reader.get_format(audio_file),
+                                      "genre": reader.get_genre(audio_file),
+                                      "track_number": reader.get_track_number(audio_file),
+                                      "total_tracks": reader.get_total_tracks(audio_file),
                                       "filename": audio_file.filename,
-                                      "disc_number": metadata_reading_strategy.get_disc_number(audio_file),
-                                      "release_year": metadata_reading_strategy.get_release_year(audio_file)
+                                      "disc_number": reader.get_disc_number(audio_file),
+                                      "release_year": reader.get_release_year(audio_file)
                                   }
                                   .items()).map(lambda k, v: (k, v if v else self._default_value(k))).toDict()
         return TrackInfo(**track_attributes)
