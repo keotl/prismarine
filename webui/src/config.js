@@ -1,1 +1,1 @@
-export const waveformServer = "http://localhost:4000";
+export const waveformServer = "";

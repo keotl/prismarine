@@ -82,9 +82,7 @@ class InMemoryMediaLibrary(MediaLibrary):
     def get_album_for_track(self, track_id: uuid.UUID) -> AlbumInfo:
         track = self.get_track(track_id)
         album = Stream(self.content['albums'].values()).firstMatch(lambda album: album.should_contain(track))
-        if album is None:
-            raise NoSuchAlbumException()
-        return album
+        return album.orElseThrow(NoSuchAlbumException())
 
     @Override
     def get_artist(self, id: uuid.UUID) -> ArtistInfo:

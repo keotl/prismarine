@@ -20,9 +20,7 @@ class ArtworkReader(object):
     def get_artwork(self, file_path: str) -> Artwork:
         audio_file = mutagen.File(file_path)
 
-        strategy: MetadataReadingStrategy = Stream(self.metadata_reading_strategies).firstMatch(
-            lambda s: s.matches(audio_file))
-        if strategy is None:
-            raise UnknownAudioFileFormatException()
-
-        return strategy.get_cover_art(audio_file)
+        return Stream(self.metadata_reading_strategies) \
+            .firstMatch(lambda s: s.matches(audio_file)) \
+            .map(lambda x: x.get_cover_art(audio_file)) \
+            .orElseThrow(UnknownAudioFileFormatException())
