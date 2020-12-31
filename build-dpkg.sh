@@ -17,4 +17,5 @@ cp deploy/config/prismarine.service build/prismarine/etc/systemd/system/
 
 #TODO remove, directory structure should be created correctly from the start
 mv build/prismarine/debian build/prismarine/DEBIAN
+sed -i "s/@@VERSION@@/$(git describe --tags)/g" build/prismarine/DEBIAN/control
 dpkg-deb --build build/prismarine

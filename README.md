@@ -1,5 +1,5 @@
 # Prismarine Music Player
-![logo](./logo.png)
+![logo](./assets/logo.png)
 
 A self-hosted music streaming app.
 
