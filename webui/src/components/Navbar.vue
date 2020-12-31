@@ -2,15 +2,15 @@
 <div class="navbar">
   <div class="navbar-brand">
     <div class="navbar-item">
-    <router-link to="/" class="navbar-item" tag="div" style="cursor: pointer;">
+    <router-link to="/" tag="div" style="cursor: pointer;">
     Prismarine Player
       </router-link>
     </div>
   </div>
   <div class="navbar-menu">
     <div class="navbar-start">
-      <router-link to="/" class="navbar-item" tag="a">
-        <i class="material-icons"> home </i>
+      <router-link to="/" class="navbar-item home-button" tag="a">
+        <i class="material-icons">home</i>
       </router-link>
     </div>
     <div class="navbar-end">
@@ -55,5 +55,11 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.home-button:focus {
+    background-color: unset !important;
+}
+.home-button:hover {
+    background-color: $menu-accent-background !important;
 }
 </style>

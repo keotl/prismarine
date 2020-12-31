@@ -1,5 +1,5 @@
 <template>
-<div class="columns" style="margin-bottom: 0px">
+<div class="columns album-container" style="margin-bottom: 0px">
   <div class="column is-one-third">
     <div style="height: 4em" />
 
@@ -141,5 +141,8 @@ export default {
 }
 .hidden-link {
     cursor: pointer;
+}
+.album-container {
+    overflow-y: scroll;
 }
 </style>
