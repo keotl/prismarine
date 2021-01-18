@@ -6,9 +6,9 @@
       {{ speakerIconName }}
     </i>
   </div>
-  <div class="clickbox" v-on:mousedown="startSeeking" v-on:click="seek">
+  <div class="clickbox" v-on:mousedown="startSeeking" v-on:click="seek" v-on:wheel="scroll">
   <div class="volume-slider" >
-    <div class="volume-highlight" v-bind:style="{width: volumePercentage}" ref="slider" v-on:mousedown="startSeeking" v-on:click="seek" />
+    <div class="volume-highlight" v-bind:style="{width: volumePercentage}" ref="slider" v-on:mousedown="startSeeking" v-on:click="seek"/>
     <div>
       <div class="volume-pin" />
     </div>
@@ -62,6 +62,14 @@ export default {
       }
       if (this.volume > 1) {
         this.volume = 1;
+      }
+      window.localStorage.setItem('volume', this.volume);
+    },
+    scroll(event) {
+      if (event.deltaY < 0 || event.deltaX > 0) {
+        this.volume = Math.min(Math.round((this.volume + 0.02) * 100) / 100, 100)
+      } else if (event.deltaY > 0 || event.deltaX < 0) {
+        this.volume = Math.max(Math.round((this.volume - 0.02) * 100) / 100, 0)
       }
       window.localStorage.setItem('volume', this.volume);
     },
