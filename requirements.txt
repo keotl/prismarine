@@ -10,7 +10,7 @@ distro==1.4.0
 html5lib==1.0.1
 idna==2.8
 ipaddr==2.2.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 jivago==0.5.5
 lockfile==0.12.2
 MarkupSafe==1.1.1
