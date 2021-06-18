@@ -1,6 +1,7 @@
 <template>
-<div v-if="currentTrack !== undefined" style="z-index: 100">
-  <audio v-bind:src="audioUrl" ref="audiotag" v-on:ended="advanceTrack" v-on:timeupdate="updateSeekBar" autoplay/>
+<div style="z-index: 100">
+<audio ref="audiotag" v-on:ended="advanceTrack" v-on:timeupdate="updateSeekBar"/>
+  <div v-if="currentTrack !== undefined" style="z-index: 100">
   <div class="progress-slider" v-on:mousedown="startSeeking" v-on:mouseup="stopSeeking" v-on:click="seek">
     <div class="progress" v-bind:style="{width: playedPercentage + '%'}" />
     <div class="playback-pin" />
@@ -17,6 +18,7 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 </template>
 
@@ -58,7 +60,14 @@ export default {
   methods: {
     playTrack(track) {
       this.currentTrack = track;
+
+      if (this.isPlaying()) {
+        this.$refs.audiotag.pause();
+	this.$refs.audiotag.src = "";
+      }
       PlayerEventBus.$emit('playing', track.id);
+      this.$refs.audiotag.src = `${waveformServer}/media/track/${track.id}`;
+      this.$refs.audiotag.play();
     },
     queueTracks(tracks) {
       for (let track of tracks) {
@@ -75,6 +84,7 @@ export default {
     },
     stopPlayback() {
       this.currentTrack = undefined;
+      this.$refs.audiotag.src = "";
       this.playQueue = [];
     },
     handleMousePosition(event) {
@@ -155,7 +165,10 @@ export default {
   },
   computed: {
     audioUrl() {
+    if (this.currentTrack) {
       return `${waveformServer}/media/track/${this.currentTrack.id}`;
+    }
+    return "";
     },
   },
   created() {

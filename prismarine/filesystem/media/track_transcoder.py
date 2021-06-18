@@ -27,7 +27,7 @@ class TrackTranscoder(object):
         command = ["ffmpeg", "-i",
                    f"{source_file}",
                    "-vn",
-                   "-acodec", "libopus", "-f", "webm",
+                   "-acodec", "aac", "-f", "mp4",
                    "-b:a", f"{self.streamingBitrate}",
                    f"{destination_file}"]
 
