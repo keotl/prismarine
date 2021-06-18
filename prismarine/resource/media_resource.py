@@ -29,7 +29,7 @@ class MediaResource(object):
     def get_track(self, track_id: PathParam[str], request: Request) -> Response:
         track = self.media_library.get_track(UUID(track_id))
         transcoded_track_file = self.track_transocder.transcode_track(track)
-        self.partial_content_handler.handle_partial_content_request(request, transcoded_track_file, content_type="audio/x-m4a")
+        return self.partial_content_handler.handle_partial_content_request(request, transcoded_track_file, content_type="audio/x-m4a")
 
     @GET
     @Path("/artwork/{album_id}")

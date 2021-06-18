@@ -3,7 +3,7 @@
   <div>
     <Navbar />
   </div>
-  <router-view tag="div" style="flex: 1; min-height:0;"></router-view>
+  <router-view tag="div" style="flex: 1; min-height:0; -webkit-overflow-scrolling: touch;"></router-view>
   <player/>
 
 </div>
