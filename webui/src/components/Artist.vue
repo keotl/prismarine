@@ -1,8 +1,9 @@
 <template>
 <div class="columns">
   <div class="column is-one-quarter">
-    <div class="image artist-artwork">
-      <img v-bind:src="artistImage" />
+    <div style="height: 4em" />
+    <div class="image" style="margin-left: 3rem; margin-right: 3rem;">
+    <Artwork v-bind:imageUrl="artistImage" v-bind:isPlaying="false"/>
     </div>
   </div>
   <div class="column">
@@ -40,7 +41,7 @@
 import {
   getArtistInfo
 } from '../api/waveform';
-
+import Artwork from './Artwork';
 import {
   waveformServer
 } from '../config';
@@ -49,6 +50,9 @@ export default {
   data: () => ({
     artist: {}
   }),
+  components: {
+    Artwork
+  },
   methods: {
     albumArtwork(album) {
       return `${waveformServer}${album.artwork_url}`;
@@ -75,7 +79,9 @@ export default {
   },
   computed: {
     artistImage() {
-      return `${waveformServer}${this.artist.image_url}`;
+      return "";
+      // TODO revert when using a new artist image API. - keotl 2021-07-18
+      // return `${waveformServer}${this.artist.image_url}`;
     }
   },
   watch: {
@@ -96,13 +102,6 @@ export default {
     cursor: pointer;
 }
 
-.artist-artwork {
-    border: 3px solid $border;
-    box-shadow: 8px 10px 10px 2px $menu-background;
-    margin-top: 4rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-}
 .box {
     background-color: $content-card-background;
     color: $text;

@@ -1,4 +1,4 @@
-#jivago==0.5.5
+#jivago==0.6.1
 git+https://github.com/keotl/jivago@develop
 mutagen==1.45.1
 requests==2.22.0
