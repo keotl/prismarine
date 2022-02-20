@@ -30,5 +30,5 @@ RUN chown -R prismarine:prismarine /run/nginx
 USER prismarine:prismarine
 
 EXPOSE 5000
-CMD ["/bin/sh", "-c", "nginx & gunicorn --bind=unix:/tmp/gunicorn.sock --workers=1 --threads=4 main:app"]
-#CMD ["gunicorn", "--bind=0.0.0.0:5000", "--workers=1", "--threads=4", "main:app"]
+CMD ["/bin/sh", "-c", "nginx & gunicorn --bind=unix:/tmp/gunicorn.sock --workers=1 --threads=4 main:app --timeout 400"]
+#CMD ["gunicorn", "--bind=0.0.0.0:5000", "--workers=1", "--threads=4","--timeout=400", "main:app"]
