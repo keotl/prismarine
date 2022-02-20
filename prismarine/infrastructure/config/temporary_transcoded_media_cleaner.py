@@ -1,6 +1,7 @@
 import os
 
 from jivago.config.properties.application_properties import ApplicationProperties
+from jivago.config.properties.system_environment_properties import SystemEnvironmentProperties
 from jivago.config.startup_hooks import PostInit
 from jivago.lang.annotations import Override, Inject
 from jivago.lang.runnable import Runnable
@@ -13,8 +14,8 @@ from jivago.scheduling.annotations import Scheduled, Duration
 class TemporaryTranscodedMediaCleaner(Runnable):
 
     @Inject
-    def __init__(self, application_properties: ApplicationProperties):
-        self.transcodedMediaFolder = application_properties["transcoded_media_folder"]
+    def __init__(self, application_properties: ApplicationProperties, env: SystemEnvironmentProperties):
+        self.transcodedMediaFolder = env.get("transcoded_media_folder") or application_properties["transcoded_media_folder"]
 
     @Override
     def run(self):
