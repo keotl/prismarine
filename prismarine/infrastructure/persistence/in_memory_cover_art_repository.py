@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from jivago.inject.annotation import Singleton
 from jivago.lang.annotations import Inject, Override
 
@@ -16,15 +14,15 @@ class InMemoryCoverArtRepository(CoverArtRepository):
         self.content = {}
 
     @Override
-    def get_artwork(self, album_id: UUID) -> Artwork:
+    def get_artwork(self, album_id: str) -> Artwork:
         if self.has_artwork_for(album_id):
             return self.content[album_id]
         raise NoSuchArtworkException()
 
     @Override
-    def save(self, album_id: UUID, image: Artwork):
+    def save(self, album_id: str, image: Artwork):
         self.content[album_id] = image
 
     @Override
-    def has_artwork_for(self, album_id: UUID) -> bool:
+    def has_artwork_for(self, album_id: str) -> bool:
         return album_id in self.content

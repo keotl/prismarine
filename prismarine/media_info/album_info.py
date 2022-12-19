@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from prismarine.media_info.media_info import MediaInfo
 from prismarine.media_info.track_info import TrackInfo
 
@@ -23,5 +21,5 @@ class AlbumInfo(MediaInfo):
     def add_track(self, track: TrackInfo):
         self.tracks.append(track)
 
-    def set_artist_id(self, artist_id: UUID):
+    def set_artist_id(self, artist_id: str):
         self.artist_id = artist_id

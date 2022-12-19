@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from jivago.lang.annotations import Inject
 from jivago.wsgi.annotations import Resource, Path
 from jivago.wsgi.invocation.parameters import PathParam
@@ -27,17 +25,17 @@ class MediaInfoResource(object):
     @GET
     @Path("/album/{album_id}")
     def get_album(self, album_id: PathParam[str]) -> AlbumModel:
-        album = self.media_library.get_album(UUID(album_id))
+        album = self.media_library.get_album(str(album_id))
         return self.album_mapper.to_model(album)
 
     @GET
     @Path("/track/{track_id}")
     def get_track(self, track_id: PathParam[str]) -> TrackModel:
-        track = self.media_library.get_track(UUID(track_id))
+        track = self.media_library.get_track(str(track_id))
         return self.track_mapper.to_model(track)
 
     @GET
     @Path("/artist/{artist_id}")
     def get_artist(self, artist_id: PathParam[str]) -> ArtistModel:
-        artist = self.media_library.get_artist(UUID(artist_id))
+        artist = self.media_library.get_artist(str(artist_id))
         return self.artist_mapper.to_model(artist)
