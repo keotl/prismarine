@@ -18,4 +18,17 @@ class IdFactory(object):
         return "_".join(map(_sanitize, elements))
 
 def _sanitize(x: str):
-    return ''.join(e for e in x if e.isalnum())
+    x = x.replace("œ", "oe") \
+        .replace("é", "e") \
+        .replace("è", "e") \
+        .replace("ê", "e") \
+        .replace("à", "a") \
+        .replace("û", "u") \
+        .replace("ù", "u") \
+        .replace("ô", "o")
+
+    return ''.join(e for e in x if
+                   (ord("A") <= ord(e) <= ord("Z") or
+                    ord("a") <= ord(e) <= ord("z") or
+                    ord("0") <= ord(e) <= ord("9"))
+                   )
