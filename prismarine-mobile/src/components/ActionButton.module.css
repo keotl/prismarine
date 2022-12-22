@@ -1,0 +1,14 @@
+.actionButton {
+  cursor: pointer;
+  margin: 8px;
+  color: var(--background2);
+  transition-duration: 0.2s;
+  transition-property: color;
+}
+.actionButton:active {
+  color: var(--action);
+}
+
+.active {
+  color: var(--text);
+}

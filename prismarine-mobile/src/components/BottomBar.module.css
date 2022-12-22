@@ -1,0 +1,8 @@
+.container {
+    background-color: var(--background);
+    height: 3rem;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid var(--background2);
+}
+

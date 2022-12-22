@@ -1,0 +1,80 @@
+.anchor {
+    position: absolute;
+    z-index: 1000;
+}
+
+.collapsed {
+    visibility: hidden;
+    height: 0;
+}
+
+.container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: var(--background-transluscent);
+  backdrop-filter: blur(10px);
+  transition-property: top;
+  transition-delay: 0.2s;
+}
+
+.artworkContainer {
+    margin-top: 10vh;
+}
+
+.trackDescription {
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 14pt;
+    margin-bottom: 0.2rem;
+}
+
+.artist {
+    color: var(--subtext);
+    font-weight: light;
+}
+
+.buttonContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.buttonIcon {
+    font-size: 32pt;
+}
+
+.button {
+    margin: 0.5rem;
+    cursor: pointer;
+}
+
+.playingNextContainer {
+    text-align: left;
+    width: 100%;
+    margin-left: 2rem;
+}
+
+.playingNextTitle {
+    font-size: 14pt;
+}
+
+.closeButton {
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    margin-right: 20px;
+    margin-top: 10px;
+	     
+}
+
+

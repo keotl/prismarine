@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction:column;
+}
+
+.button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 64px;
+    border-bottom: 1px solid var(--background2);
+    cursor: pointer;
+    padding-left: 16px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+}
+
+.button:active {
+    background-color: var(--background2);
+}

@@ -1,5 +1,3 @@
-from uuid import UUID
-
 from jivago.lang.annotations import Inject
 from jivago.wsgi.annotations import Resource, Path
 from jivago.wsgi.invocation.parameters import PathParam
@@ -27,12 +25,12 @@ class MediaResource(object):
     @GET
     @Path("/track/{track_id}")
     def get_track(self, track_id: PathParam[str], request: Request) -> Response:
-        track = self.media_library.get_track(UUID(track_id))
+        track = self.media_library.get_track(str(track_id))
         transcoded_track_file = self.track_transocder.transcode_track(track)
         return self.partial_content_handler.handle_partial_content_request(request, transcoded_track_file, content_type="audio/x-m4a")
 
     @GET
     @Path("/artwork/{album_id}")
     def get_album_artwork(self, album_id: PathParam[str]) -> Response:
-        artwork = self.artwork_repository.get_artwork(UUID(album_id))
+        artwork = self.artwork_repository.get_artwork(str(album_id))
         return Response(200, {'Content-Type': artwork.mime_type}, artwork.data)

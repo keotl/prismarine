@@ -6,6 +6,9 @@
     Prismarine Player
       </router-link>
     </div>
+    <a class="navbar-item" href="/mobile">
+      Mobile App
+    </a>
   </div>
   <div class="navbar-menu">
     <div class="navbar-start">

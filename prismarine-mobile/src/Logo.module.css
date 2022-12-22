@@ -1,0 +1,14 @@
+.container {
+    height: 256px;
+    width: 256px;
+    background: linear-gradient(0deg, var(--background3), var(--action));
+    /* border-radius: 8px; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    font-size: 128pt !important;
+}
+

@@ -1,0 +1,47 @@
+.row {
+  background-color: var(--background);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  height: 80px;
+}
+
+.thumbnail {
+  width: 64px;
+  border-radius: 0.25rem;
+  margin: 8px;
+  box-shadow: 2px 3px 7px 0px var(--shadow);
+  margin-right: 1rem;
+  max-height: 64px;
+}
+.placeholder {
+  height: 64px;
+  width: 61px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--background2);
+  border: 2px solid var(--background2);
+}
+
+.actionsContainer {
+  flex: 1;
+  text-align: right;
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+
+.actionContainer > * {
+  margin: 10px;
+}
+.downloadIcon {
+  color: var(--subtext);
+}
+.title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

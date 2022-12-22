@@ -4,11 +4,19 @@ COPY webui /app
 RUN npm ci
 RUN npm run build
 
+FROM node:18 as build-mobile
+WORKDIR /app
+COPY prismarine-mobile /app
+ENV PUBLIC_URL /mobile
+RUN npm ci
+RUN npm run build
+
 FROM python:3.8-alpine
 RUN apk add ffmpeg nginx
 RUN mkdir /app
 WORKDIR /app
 COPY --from=build /app/dist /app/static
+COPY --from=build-mobile /app/build /app/static/mobile
 COPY main.py ./
 COPY prismarine prismarine
 COPY requirements.txt .
