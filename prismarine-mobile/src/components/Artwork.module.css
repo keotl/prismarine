@@ -1,0 +1,15 @@
+.thumbnail {
+  height: 128px;
+  border-radius: 0.25rem;
+  margin: 8px;
+  box-shadow: 2px 3px 7px 0px var(--shadow);
+  margin-right: 1rem;
+}
+.placeholder {
+  width: 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--background2);
+  border: 2px solid var(--background2);
+}

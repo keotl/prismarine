@@ -1,0 +1,15 @@
+.App {
+    /* text-align: center; */
+    height: 100vh;
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    flex: 1;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: var(--background);
+}
+

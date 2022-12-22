@@ -1,0 +1,35 @@
+.header {
+  height: 3rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--background2);
+  position: relative;
+  background-color: var(--background);
+  /* padding-left: 2rem; */
+  /* padding-right: 2rem; */
+  /* box-shadow: 1px 1px 0 0 var(--shadow); */
+}
+
+.title {
+  font-weight: bold;
+  font-size: 16pt;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+
+.action {
+  color: var(--action);
+  cursor: pointer;
+  z-index: 1000;
+  margin-right: 1rem;
+}
+
+.back {
+  color: var(--action);
+  cursor: pointer;
+  margin-left: 1rem;
+  z-index: 1000;
+}

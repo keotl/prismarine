@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  padding-top: 4px;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--subtext);
+  transition-property: color;
+  transition-duration: 0.2s;
+}
+
+.title {
+  padding-top: 2px;
+  font-size: 7pt;
+}
+
+.active {
+  color: var(--action);
+}
