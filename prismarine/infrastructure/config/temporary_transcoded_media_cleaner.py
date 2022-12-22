@@ -1,22 +1,24 @@
-import os
-
-from jivago.config.properties.application_properties import ApplicationProperties
-from jivago.config.properties.system_environment_properties import SystemEnvironmentProperties
-from jivago.config.startup_hooks import PostInit
+import logging
+import traceback
 from jivago.lang.annotations import Override, Inject
 from jivago.lang.runnable import Runnable
-from jivago.lang.stream import Stream
 from jivago.scheduling.annotations import Scheduled, Duration
 
+from prismarine.filesystem.media.track_transcoder import TrackTranscoder
 
-@PostInit
+
 @Scheduled(every=Duration.HOUR)
 class TemporaryTranscodedMediaCleaner(Runnable):
 
     @Inject
-    def __init__(self, application_properties: ApplicationProperties, env: SystemEnvironmentProperties):
-        self.transcodedMediaFolder = env.get("transcoded_media_folder") or application_properties["transcoded_media_folder"]
+    def __init__(self, track_transcoder: TrackTranscoder):
+        self._track_transcoder = track_transcoder
+        self._logger = logging.getLogger(self.__class__.__name__)
 
     @Override
     def run(self):
-        Stream(os.listdir(self.transcodedMediaFolder)).map(lambda filename: os.path.join(self.transcodedMediaFolder, filename)).forEach(lambda x: os.remove(x))
+        try:
+            self._track_transcoder.cleanup()
+        except Exception as e:
+            traceback.print_exc()
+            self._logger.error(e)
