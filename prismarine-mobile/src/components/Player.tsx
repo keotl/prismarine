@@ -68,6 +68,10 @@ export function Player() {
     artworkUrl,
   ]);
 
+  usePreloadedTrack(
+    playback.queue.length > 0 ? playback.queue[0].id : undefined
+  );
+
   function updatePlayerStatus() {
     setPaused(audioElement.current?.paused || false);
   }
@@ -126,4 +130,20 @@ export function Player() {
       )}
     </>
   );
+}
+
+function usePreloadedTrack(trackId: string | undefined) {
+  const nextTrackUrl = useMedia(trackId);
+  useEffect(() => {
+    if (!nextTrackUrl || nextTrackUrl.startsWith("blob")) {
+      console.log("skiping", nextTrackUrl);
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      fetch(nextTrackUrl).catch((_) => undefined /* ignored */);
+    }, 5000);
+
+    return () => clearTimeout(timeoutId);
+  }, [nextTrackUrl]);
 }
