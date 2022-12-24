@@ -22,13 +22,11 @@ export function TrackRow(props: Props) {
   return (
     <div className={styles.container} onClick={props.onClick}>
       <div className={styles.trackNumber}>{props.track.track_number}</div>
-	  <div className={styles.title}>{props.track.title}</div>
+      <div className={styles.title}>{props.track.title}</div>
       <div className={styles.buttonContainer}>
         <div>
           {isSaved && (
-            <span
-              className={"material-symbols-rounded " + styles.downloadIcon}
-            >
+            <span className={"material-symbols-rounded " + styles.downloadIcon}>
               download
             </span>
           )}

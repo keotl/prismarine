@@ -6,7 +6,15 @@
   margin-left: 1rem;
   margin-right: 1rem;
   border-top: 1px solid var(--background2);
+  transition-property: background-color;
+  transition-duration: 0.2s;
+  cursor: pointer;
 }
+
+.container:active {
+  background-color: var(--background2);
+}
+
 .title {
   flex: 1;
   margin-left: 1rem;
@@ -23,6 +31,8 @@
 }
 .trackNumber {
   color: var(--subtext);
+  width: 2ch;
+  text-align: right;
 }
 
 .downloadIcon {
