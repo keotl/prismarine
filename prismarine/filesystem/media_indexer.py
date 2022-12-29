@@ -49,9 +49,14 @@ class MediaIndexer(object):
                 continue
 
     def fetch_and_save_album_artwork(self, album: AlbumInfo, track_file: str):
-        artwork = self.artwork_reader.get_artwork(track_file)
+        artwork = None
+        try:
+            artwork = self.artwork_reader.get_artwork(track_file)
+        except UnknownAudioFileFormatException:
+            pass
         if artwork is None:
             artwork = self.local_folder_artwork_reader.get_artwork(album)
+
         if artwork is not None:
             self.artwork_repository.save(album.id, artwork)
 
