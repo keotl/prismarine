@@ -6,17 +6,18 @@ RUN npm run build
 
 FROM node:18 as build-mobile
 WORKDIR /app
+COPY prismarine-mobile/package.json /app/
+COPY prismarine-mobile/package-lock.json /app/
+RUN npm ci
 COPY prismarine-mobile /app
 ENV PUBLIC_URL /mobile
-RUN npm ci
 RUN npm run build
 
 FROM python:3.8-alpine
 RUN apk add ffmpeg nginx
 RUN mkdir /app
 WORKDIR /app
-COPY --from=build /app/dist /app/static
-COPY --from=build-mobile /app/build /app/static/mobile
+
 COPY main.py ./
 COPY prismarine prismarine
 COPY requirements.txt .
@@ -24,6 +25,8 @@ COPY application.yml .
 COPY deploy/docker/nginx.conf /etc/nginx/nginx.conf
 RUN pip install -r requirements.txt
 RUN pip install gunicorn
+COPY --from=build /app/dist /app/static
+COPY --from=build-mobile /app/build /app/static/mobile
 ENV PYTHONPATH /app
 
 

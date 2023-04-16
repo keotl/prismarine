@@ -23,7 +23,8 @@ export function Player() {
       navigator.mediaSession.playbackState = "none";
     }
   }, [isPaused, playback.state]);
-
+  // const img96 = useResizedImage(artworkUrl, 96);
+  const img384 = useResizedImage(artworkUrl, 384);
   useEffect(() => {
     if (!playback.current) {
       navigator.mediaSession.metadata = null;
@@ -34,19 +35,18 @@ export function Player() {
         album: playback.current.album,
         artwork: artworkUrl
           ? [
+              // {
+              //   // Works in the small preview window on iPhone iOS 16+
+              //   // But makes the artwork blurry when expanded, even if other sizes are available
+              //   src: img96,
+              //   sizes: "96x96",
+              //   type: "image/png",
+              // },
               {
-                src: artworkUrl,
-                sizes: "32x32",
-                type: "image/png",
-              },
-              {
-                src: artworkUrl,
-                sizes: "256x256",
-                type: "image/png",
-              },
-              {
-                src: artworkUrl,
-                sizes: "512x512",
+                // This is the highest that seems to work on the iPhone iOS 16+
+                // Works when the artwork is expanded, but doesn't in the small preview
+                src: img384,
+                sizes: "384x384",
                 type: "image/png",
               },
             ]
@@ -66,6 +66,8 @@ export function Player() {
     navigator.mediaSession.metadata,
     audioElement.current,
     artworkUrl,
+    // img96,
+    img384,
   ]);
 
   usePreloadedTrack(
@@ -146,4 +148,35 @@ function usePreloadedTrack(trackId: string | undefined) {
 
     return () => clearTimeout(timeoutId);
   }, [nextTrackUrl]);
+}
+
+function useResizedImage(artworkUrl: string | null, size: number) {
+  const [resized, setResized] = useState<string>("");
+  useEffect(() => {
+    if (!artworkUrl) {
+      return;
+    }
+    const img = new Image();
+    img.src = artworkUrl;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+      if (img.naturalWidth < size && img.naturalHeight < size) {
+        setResized(artworkUrl);
+        return;
+      }
+      if (img.naturalWidth > img.naturalHeight) {
+        canvas.width = size;
+        canvas.height = (img.naturalHeight / img.naturalWidth) * size;
+      } else {
+        canvas.height = size;
+        canvas.width = (img.naturalWidth / img.naturalHeight) * size;
+      }
+      ctx!.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      setResized(canvas.toDataURL("image/png"));
+    };
+  }, [artworkUrl, size]);
+
+  return resized;
 }
