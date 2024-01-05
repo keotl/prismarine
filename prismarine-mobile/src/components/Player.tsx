@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import { PlaybackContext } from "../context/PlaybackContext";
 import { useArtworkUrl, useMedia } from "../context/SavedMediaContext";
 import { ActionButton } from "./ActionButton";
@@ -22,13 +22,30 @@ export function Player() {
     } else {
       navigator.mediaSession.playbackState = "none";
     }
+    return () => {
+      navigator.mediaSession.playbackState = "none";
+    };
   }, [isPaused, playback.state]);
+
   // const img96 = useResizedImage(artworkUrl, 96);
   const img384 = useResizedImage(artworkUrl, 384);
+
+  const updatePlayerStatus = useCallback(() => {
+    setPaused(audioElement.current?.paused || false);
+  }, [audioElement]);
+  const togglePlayPause = useCallback(() => {
+    if (audioElement.current?.paused) {
+      audioElement.current.play();
+    } else {
+      audioElement.current?.pause();
+    }
+  }, [audioElement]);
+
   useEffect(() => {
     if (!playback.current) {
       navigator.mediaSession.metadata = null;
     } else {
+      navigator.mediaSession.metadata = null;
       navigator.mediaSession.metadata = new MediaMetadata({
         title: playback.current.title,
         artist: playback.current.artist,
@@ -60,12 +77,17 @@ export function Player() {
         playback.reverse
       );
     }
+    return () => {
+      navigator.mediaSession.metadata = null;
+    };
   }, [
     playback.current,
     isPaused,
     navigator.mediaSession.metadata,
     audioElement.current,
     artworkUrl,
+    togglePlayPause,
+    playback.advance,
     // img96,
     img384,
   ]);
@@ -73,17 +95,6 @@ export function Player() {
   usePreloadedTrack(
     playback.queue.length > 0 ? playback.queue[0].id : undefined
   );
-
-  function updatePlayerStatus() {
-    setPaused(audioElement.current?.paused || false);
-  }
-  function togglePlayPause() {
-    if (audioElement.current?.paused) {
-      audioElement.current.play();
-    } else {
-      audioElement.current?.pause();
-    }
-  }
 
   return (
     <>
@@ -102,7 +113,7 @@ export function Player() {
             autoPlay
             ref={audioElement}
             src={mediaUrl}
-            onEnded={() => playback.advance()}
+            onEnded={playback.advance}
             onAbort={updatePlayerStatus}
             onPlay={updatePlayerStatus}
             onPause={updatePlayerStatus}

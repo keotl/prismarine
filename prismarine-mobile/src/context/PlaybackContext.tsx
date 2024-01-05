@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useReducer } from "react";
+import { createContext, ReactNode, useCallback, useReducer } from "react";
 import { Track } from "../api";
 
 type State = {
@@ -86,23 +86,27 @@ export function PlaybackContextProvider(props: { children: ReactNode }) {
     previous: [],
   });
 
-  function playTracks(tracks: Track[], previous: Track[]) {
-    dispatch({
-      type: "playAlbum",
-      first: tracks[0],
-      next: tracks.slice(1),
-      previous,
-    });
+  const playTracks = useCallback(
+    (tracks: Track[], previous: Track[]) => {
+      dispatch({
+        type: "playAlbum",
+        first: tracks[0],
+        next: tracks.slice(1),
+        previous,
+      });
 
-    // @ts-ignore
-    document.getElementById("audio")!.load(); // Preload in the onclick callback, to workaround autoplay
-  }
-  function advance() {
+      // @ts-ignore
+      document.getElementById("audio")!.load(); // Preload in the onclick callback, to workaround autoplay
+    },
+    [dispatch]
+  );
+
+  const advance = useCallback(() => {
     dispatch({ type: "advance" });
-  }
-  function reverse() {
+  }, [dispatch]);
+  const reverse = useCallback(() => {
     dispatch({ type: "reverse" });
-  }
+  }, [dispatch]);
 
   return (
     <PlaybackContext.Provider
